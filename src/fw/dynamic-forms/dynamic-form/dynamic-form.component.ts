@@ -80,4 +80,8 @@ export class DynamicFormComponent implements OnChanges, OnInit {
       this.update.emit(this.form.value);
     }
   }
+
+  onSubmit() {
+    this.onSave();
+  }
 }
