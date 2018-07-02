@@ -6,6 +6,7 @@
     <th style="width: 25px">Id</th>
     <th style="width: 200px">Country</th>
     <th style="width: 70px">EPI Index</th>
+    <th style="width: 70px">Continent</th>
     <th style="min-width: 100px"></th>
   </tr>
   </thead>
@@ -14,6 +15,7 @@
     <td>{{ row.id }}</td>
     <td>{{ row.name }}</td>
     <td>{{ row.epiIndex }}</td>
+    <td>{{ row.continent }}</td>
     <td *ngIf="row.id != deleteId">
       <button class="btn btn-sm btn-primary"
         (click)="showCountryDetail(row.id)">

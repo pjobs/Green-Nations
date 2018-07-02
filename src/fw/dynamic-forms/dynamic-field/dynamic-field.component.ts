@@ -31,8 +31,14 @@ export class DynamicFieldComponent implements OnInit, OnChanges  {
 
   setEnableDisable(operation):void{
     if(operation == "details" || this.field.isId)
+    {
       this.disabled = true;
-    else
+    }else{
       this.disabled = false;
     }
+  }
+
+  hasOptions():boolean {
+    return this.field.options.length>0;
+  }
 }

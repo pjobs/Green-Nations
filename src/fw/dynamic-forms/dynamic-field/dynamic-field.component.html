@@ -2,22 +2,23 @@
 
   <div class="form-group">
     <label [htmlFor]="field.key">{{ field.label }}</label>
-      <ng-container [ngSwitch]="(field.inputType)? field.inputType : field.type">
-          <input class="form-control" [formControlName]="field.key" [id]="field.key" *ngSwitchCase="'string'" [attr.disabled]="disabled?'':null" />
-          <input class="form-control" [formControlName]="field.key" [id]="field.key" *ngSwitchCase="'number'" [attr.disabled]="disabled?'':null"/>
-          <select class="form-control" [formControlName]="field.key" [id]="field.key" *ngSwitchCase="'lookUp'" [attr.disabled]="disabled?'':null">
-            <!-- [disabled]="operation == 'details' || field.isId"> -->
-            <template *ngIf='field.options?.length > 0 else NoFieldOptions'>
-              <option *ngFor="let selectOption of field.options" [value]="selectOption.value">{{selectOption.text}}</option>
-            </template>
-            <ng-container #NoFieldOptions>
-              <option [value]="null">Options are not filled</option>
-            </ng-container>
-          </select>
-      </ng-container>
+    <ng-container [ngSwitch]="(field.inputType)? field.inputType : field.type">
+      <input class="form-control" [formControlName]="field.key" [id]="field.key" *ngSwitchCase="'string'" [attr.disabled]="disabled?'':null"
+      />
+      <input class="form-control" [formControlName]="field.key" [id]="field.key" *ngSwitchCase="'number'" [attr.disabled]="disabled?'':null"
+      />
+      <select class="form-control" [formControlName]="field.key" [id]="field.key" *ngSwitchCase="'lookUp'" [attr.disabled]="disabled?'':null">
+        <!-- [disabled]="operation == 'details' || field.isId"> -->
+        <ng-container *ngIf='this.hasOptions(); else NoFieldOptions' #FieldOptions>
+          <option *ngFor="let selectOption of field.options" [value]="selectOption.value">{{selectOption.value}}</option>
+        </ng-container>
+        <div #NoFieldOptions>
+          <option [value]="null">Options are not filled {{field.options.length}}</option>
+        </div>
+      </select>
+    </ng-container>
 
-    <div *ngIf="form.get(field.key).hasError('required') && (submitted || form.get(field.key).touched)"
-          class="alert alert-danger">
+    <div *ngIf="form.get(field.key).hasError('required') && (submitted || form.get(field.key).touched)" class="alert alert-danger">
       {{ field.label }} is required.
     </div>
 

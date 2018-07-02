@@ -39,9 +39,9 @@ export class CountryDetailComponent implements OnInit {
       type: 'string',
       isId: false,
       label: 'Continent',
-      required: true,
-      inputType: "lookUp"
-      ,options:[{value:"Africa",text:"Africa"},{value:"Asia",text:"Asia"},]
+      required: false,
+      inputType: "lookUp",
+      options:[{value:"Africa",text:"Africa"},{value:"Asia",text:"Asia"}]
     }
   ];
   errorMessage: string;
