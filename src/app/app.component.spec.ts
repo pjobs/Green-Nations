@@ -1,7 +1,9 @@
 /* tslint:disable:no-unused-variable */
 
 import { TestBed, async } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { FwModule } from '../fw/fw.module';
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -9,6 +11,7 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [ RouterTestingModule, FwModule ]
     });
     TestBed.compileComponents();
   });
@@ -19,16 +22,15 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-  it(`should have as title 'app works!'`, async(() => {
+  it(`should have menu items`, async(() => {
     let fixture = TestBed.createComponent(AppComponent);
     let app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app works!');
+    expect(app.menuService.items.length).toBeGreaterThan(0);
   }));
 
-  it('should render title in a h1 tag', async(() => {
+  it('should have valid frameworkConfigService', async(() => {
     let fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    let compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('app works!');
+    let app = fixture.debugElement.componentInstance;
+    expect(app.frameworkConfigService).toBeTruthy();
   }));
 });

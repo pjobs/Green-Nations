@@ -1,0 +1,12 @@
+<div [formGroup]="form">
+<select  class="form-control" [formControlName]="field.key" [attr.disabled]="disabled?'':null">
+    <!-- [id]="this.field.key" [formControlName]="field.key" -->
+  <!-- [disabled]="operation == 'details' || field.isId"> -->
+  <ng-container *ngIf='this.hasOptions(); else NoFieldOptions' #FieldOptions> -->
+    <option *ngFor="let selectOption of field.options" [value]="selectOption.value">{{selectOption.value}}</option>
+  </ng-container>
+  <ng-template #NoFieldOptions>
+    <option [value]="null">Options are not filled {{this.field.options.length}}</option>
+  </ng-template>
+</select>
+</div>

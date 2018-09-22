@@ -17,7 +17,7 @@ export class DynamicFieldComponent implements OnInit, OnChanges  {
   @Input() form: FormGroup;
   @Input() operation: string;
   @Input() submitted: boolean;
-  private disabled:boolean = false;
+  public disabled = false;
 
   get isValid() { return this.form.controls[this.field.key].valid; }
 
@@ -29,16 +29,13 @@ export class DynamicFieldComponent implements OnInit, OnChanges  {
     this.setEnableDisable(this.operation);
   }
 
-  setEnableDisable(operation):void{
-    if(operation == "details" || this.field.isId)
-    {
+  setEnableDisable(operation): void {
+    if (operation === 'details' || this.field.isId) {
       this.disabled = true;
-    }else{
+    } else {
       this.disabled = false;
     }
   }
 
-  hasOptions():boolean {
-    return this.field.options.length>0;
-  }
+
 }

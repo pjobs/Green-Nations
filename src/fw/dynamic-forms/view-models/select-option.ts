@@ -1,4 +1,4 @@
-export interface selectOption{
-    text:string,
-    value?:string
+export interface selectOption {
+    text: string,
+    value?: string
 }
