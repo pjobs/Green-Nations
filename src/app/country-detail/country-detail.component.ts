@@ -40,15 +40,15 @@ export class CountryDetailComponent implements OnInit {
       isId: false,
       label: 'Continent',
       required: false,
-      inputType: "lookUp",
-      options:[{value:"Africa",text:"Africa"},{value:"Asia",text:"Asia"}]
+      inputType: 'lookUp',
+      options: [ {value: 'Africa', text: 'Africa'}, {value: 'Asia', text: 'Asia'}]
     }
   ];
   errorMessage: string;
   operation: string;
 
   constructor(private route: ActivatedRoute,
-              private router: Router, 
+              private router: Router,
               private dataService: AppDataService) { }
 
   createCountry(country: Country) {
@@ -64,11 +64,11 @@ export class CountryDetailComponent implements OnInit {
     this.operation = this.route.snapshot.params['operation'];
 
     if (this.operation === 'create') {
-      this.country = { id: 0, name: "", epiIndex: null};
-    }
-    else
+      this.country = { id: 0, name: '', epiIndex: null, continent: ''};
+    } else {
       this.dataService.getCountry(this.route.snapshot.params['id'])
         .subscribe((country: Country) => this.country = country);
+    }
   }
 
   updateCountry(country: Country) {

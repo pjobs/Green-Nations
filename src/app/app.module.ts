@@ -31,15 +31,15 @@ import { ImagePanelComponent } from './panels/image-panel/image-panel.component'
     CountryMaintComponent,
     AuthenticatedUserComponent,
     CountryPanelComponent,
-    ImagePanelComponent
+    ImagePanelComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
     HttpModule,
     FwModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
   ],
   providers: [
     UserService,

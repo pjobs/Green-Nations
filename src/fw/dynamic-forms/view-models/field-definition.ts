@@ -1,6 +1,5 @@
-import { selectOption } from "fw/dynamic-forms/view-models/select-option";
+import { selectOption } from './select-option';
 
-//import { selectOption } from "./select-option";
 
 export interface FieldDefinition {
   key: string,
@@ -8,6 +7,6 @@ export interface FieldDefinition {
   isId: boolean,
   label: string,
   required: boolean,
-  inputType?:string,
-  options?:Array<selectOption>
+  inputType?: string,
+  options?: Array<selectOption>
 }

@@ -1,3 +1,4 @@
+import { DropdownFieldComponent } from './dynamic-forms/fields/dropdown-field/dropdown-field.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -44,7 +45,8 @@ import { PanelComponent } from './panels/panel/panel.component';
     RegisterUserComponent,
     DynamicFormComponent,
     DynamicFieldComponent,
-    PanelComponent
+    PanelComponent,
+    DropdownFieldComponent
   ],
   providers: [
     FrameworkConfigService,
@@ -56,7 +58,8 @@ import { PanelComponent } from './panels/panel/panel.component';
     DynamicFormComponent,
     PanelComponent,
     ScreenLarge,
-    ScreenBelowLarge
+    ScreenBelowLarge,
+    RouterModule
   ]
 })
 export class FwModule { }

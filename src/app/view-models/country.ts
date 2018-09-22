@@ -1,7 +1,7 @@
+import { Entity } from './entity';
 
-export interface Country {
-    id : number;
-    name : string;
-    epiIndex : number;
-    continent? : string;
+export interface Country extends Entity {
+    name: string;
+    epiIndex: number;
+    continent?: string;
 }
