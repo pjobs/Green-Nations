@@ -4,7 +4,7 @@
       <option *ngFor="let selectOption of field.options" [value]="selectOption.value">{{selectOption.value}}</option>
     </ng-container>
     <ng-template #NoFieldOptions>
-      <option [value]="null">Options are not filled {{this.field.options.length}}</option>
+      <option [value]="null">Options are not filled</option>
     </ng-template>
   </select>
 </div>

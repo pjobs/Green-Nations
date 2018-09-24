@@ -2,8 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS  } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { FwModule } from '../fw/fw.module';
@@ -20,6 +20,8 @@ import { AuthGuard } from './services/auth-guard.service';
 import { AppDataService } from './services/app-data.service';
 import { CountryPanelComponent } from './panels/country-panel/country-panel.component';
 import { ImagePanelComponent } from './panels/image-panel/image-panel.component';
+import { fakeBackendProvider } from './helpers/fake-backend.interceptor';
+import { ErrorInterceptor } from './helpers/error.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,16 +38,19 @@ import { ImagePanelComponent } from './panels/image-panel/image-panel.component'
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpModule,
+    HttpClientModule,
     FwModule,
     RouterModule.forRoot(appRoutes),
     FormsModule,
   ],
   providers: [
+    { provide: 'BASE_URL', useValue: 'http://localhost:4200' },
     UserService,
     { provide: UserApi, useExisting: UserService },
     AuthGuard,
-    AppDataService
+    AppDataService,
+    fakeBackendProvider,
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
   bootstrap: [AppComponent]
 })

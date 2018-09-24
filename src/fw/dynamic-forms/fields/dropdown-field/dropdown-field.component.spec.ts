@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component } from '@angular/core';
 import { DropdownFieldComponent } from './dropdown-field.component';
 import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
+import { FieldDefinition } from 'fw/dynamic-forms/view-models/field-definition';
 
 describe('DropdownFieldComponent', () => {
   let component: DropdownFieldComponent;
@@ -18,7 +19,7 @@ describe('DropdownFieldComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(DropdownFieldComponent);
     component = fixture.componentInstance;
-    const field:FieldDefinition  = {id:1, key:'test', type:'lookUp', options:[]};
+    const field: FieldDefinition  = { key:'test', type:'lookUp', isId: false, label:'test', required:false, options: [] };
     const formControl = new FormControl(field);
     component.field = field;
     component.form = new FormGroup({test : formControl});
