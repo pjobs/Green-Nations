@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostBinding, HostListener,
-         Input, OnInit, Renderer,
-         trigger, state, style, transition, animate } from '@angular/core';
+         Input, OnInit, Renderer } from '@angular/core';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 import { NavigationEnd, Router } from '@angular/router';
 
 import { MenuItem, MenuService } from '../../services/menu.service';

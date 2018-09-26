@@ -1,30 +1,24 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit, Inject } from '@angular/core';
 
 import { UserService } from './user.service';
 import { Country } from '../view-models/country';
 import { Observable } from 'rxjs/Observable';
+import { pipe } from '@angular/core/src/render3/pipe';
+import { of } from 'rxjs'
+import { delay, filter } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
-export class AppDataService {
-
-  private countries: Array<Country> = [
-    { id: 1, name: 'Switzerland',  epiIndex: 87.67, continent: 'Europe' },
-    { id: 2, name: 'Luxembourg',   epiIndex: 83.29 },
-    { id: 3, name: 'Australia', epiIndex: 82.4 },
-    { id: 4, name: 'Singapore', epiIndex: 81.78, continent: 'Asia' },
-    { id: 5, name: 'Czech Republic', epiIndex: 81.47 },
-    { id: 6, name: 'Germany', epiIndex: 80.47 },
-    { id: 7, name: 'Spain', epiIndex: 79.09 },
-    { id: 8, name: 'Austria', epiIndex: 78.32 },
-    { id: 9, name: 'Sweden', epiIndex: 78.09 },
-    { id: 10, name: 'Norway', epiIndex: 78.04 },
-    { id: 11, name: 'India', epiIndex: 58.04 },
-  ];
-
-  constructor() {
+export class AppDataService implements OnInit {
+  private countries: Country[] = [];
+  ngOnInit(): void {
   }
 
-  createCountry(vm: Country): Observable<any> {
+  constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
+    http.get<Country[]>(this.baseUrl + '/countries').subscribe((data)=> { this.countries = data;}); //.pipe(filter((c)=> c instanceof Country))
+  }
+
+  createCountry(vm: Country): Observable<Country> {
     let id = 0;
     this.countries.forEach((c) => {
         if (c.id >= id) {
@@ -33,27 +27,27 @@ export class AppDataService {
     });
     vm.id = id;
     this.countries.push(vm);
-    return Observable.of(vm);
+    return of(vm);
   }
 
   deleteCountry(id: number): Observable<any> {
-    return Observable.of({}).delay(1000)
+    return of({}).pipe(delay(1000))
      .do(e => this.countries.splice(this.countries.findIndex(c => c.id === id), 1));
   }
 
   getCountries(): Observable<any> {
-    return Observable.of(this.countries);
+    return of(this.countries);
   }
 
-  getCountry(id: number): Observable<any> {
+  getCountry(id: number): Observable<Country> {
     let index = this.countries.findIndex(c => c.id == id);
-    return Observable.of(this.countries[index]);
+    return of(this.countries[index]);
   }
 
-  updateCountry(updatedCountry: Country): Observable<any> {
+  updateCountry(updatedCountry: Country): Observable<Country> {
     let country = this.countries.find(c => c.id === updatedCountry.id);
     Object.assign(country, updatedCountry);
-    return Observable.of(country).delay(1000);
+    return of(country).pipe(delay(1000));
 
   }
 
